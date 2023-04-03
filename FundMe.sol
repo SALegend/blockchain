@@ -4,6 +4,8 @@
 
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
 
 contract Fund
 {
@@ -27,6 +29,27 @@ contract Fund
         //chainlink keepers are similar to event listener in js it peforms a speciic task/action like deploy ,generate etc which we did manually,at a specified time interval or a condition is triggered which we have mentioned 
         //chainlink can make direct request to any api
         //Inorder to get data from chainlink we need to pay oracle gas or link token
+        function getPrice() public {
+            //API
+            //Address 0x694AA1769357215DE4FAC081bf1f309aDC325306
+            AggregatorV3Interface priceFeed=AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+             (
+            /* uint80 roundID */,
+            int price,
+            /*uint startedAt*/,
+            /*uint timeStamp*/,
+            /*uint80 answeredInRound*/
+        ) = priceFeed.latestRoundData();
+        }
+        function getVersion() public view returns(uint256)
+        {
+            AggregatorV3Interface priceFeed=AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+            return priceFeed.version();
+        }
+        function getConversionRate() public 
+        {
+
+        }
 
 
 
